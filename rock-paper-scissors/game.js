@@ -1,7 +1,8 @@
+const CHOICES = ["rock", "paper", "scissors"];
+
 const getComputerChoice = () => {
-  const choices = ["rock", "paper", "scissors"];
-  const num = Math.floor(Math.random() * 3);
-  return choices[num];
+  const randomIndex = Math.floor(Math.random() * CHOICES.length);
+  return CHOICES[randomIndex];
 };
 
 const getHumanChoice = () => {
