@@ -6,10 +6,10 @@ const getComputerChoice = () => {
 };
 
 const getHumanChoice = () => {
-  return prompt("Choose rock, paper, or scissors:").toLowerCase();
+  return prompt("Choose rock, paper, or scissors.").toLowerCase();
 };
 
-const getRoundWinner = (computerChoice, humanChoice) => {
+const getWinner = (computerChoice, humanChoice) => {
   if (computerChoice === humanChoice) return "draw";
 
   const winningCombos = {
@@ -26,47 +26,40 @@ const getRoundWinner = (computerChoice, humanChoice) => {
 const playGame = () => {
   let computerScore = 0;
   let humanScore = 0;
-  let round = 1;
 
   const playRound = (computerChoice, humanChoice) => {
-    const keepScore = (roundWinner) => {
-      if (roundWinner === "draw") {
-        console.log("Draw.");
-      } else if (roundWinner === computerChoice) {
-        console.log("You lose.", computerChoice, "beats", humanChoice);
-        computerScore++;
-      } else {
-        console.log("You win!", humanChoice, "beats", computerChoice);
-        humanScore++;
-      }
-    };
-
+    console.log("-------------------");
     console.log("You played", humanChoice);
     console.log("Computer played", computerChoice);
 
-    const roundWinner = getRoundWinner(computerChoice, humanChoice);
+    const roundWinner = getWinner(computerChoice, humanChoice);
 
-    keepScore(roundWinner);
-
+    if (roundWinner === "draw") {
+      console.log("Draw.");
+    } else {
+      roundWinner === computerChoice ? computerScore++ : humanScore++;
+      console.log(
+        `You ${
+          roundWinner === computerChoice
+            ? `lose. ${computerChoice} beats ${humanChoice}`
+            : `win! ${humanChoice} beats ${computerChoice}`
+        }`
+      );
+    }
     console.log("computer:", computerScore, ", human:", humanScore);
     return roundWinner;
   };
 
+  console.log("Rock Paper Scissors");
+  console.log("Best 3 out of 5.");
+
   while (computerScore < 3 && humanScore < 3) {
-    console.log("Round", round);
     const computerSelection = getComputerChoice();
     const humanSelection = getHumanChoice();
-    const roundWinner = playRound(computerSelection, humanSelection);
-    if (roundWinner !== "draw") {
-      round++;
-    }
+    playRound(computerSelection, humanSelection);
   }
 
-  if (computerScore > humanScore) {
-    console.log("YOU LOSE.");
-  } else {
-    console.log("YOU WIN!!");
-  }
+  console.log(`YOU ${humanScore > computerScore ? "WIN" : "LOSE"}.`);
 };
 
 playGame();
