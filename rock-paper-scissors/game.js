@@ -5,22 +5,18 @@ const getComputerChoice = () => {
   return CHOICES[randomIndex];
 };
 
-const getHumanChoice = () => {
-  return prompt("Choose rock, paper, or scissors.").toLowerCase();
-};
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+rockButton.addEventListener("click", (e) => getHumanChoice(e));
+paperButton.addEventListener("click", (e) => getHumanChoice(e));
+scissorsButton.addEventListener("click", (e) => getHumanChoice(e));
 
-const getWinner = (computerChoice, humanChoice) => {
-  if (computerChoice === humanChoice) return "draw";
+const humanScoreDisplay = document.querySelector("#human-score");
+const computerScoreDisplay = document.querySelector("#computer-score");
 
-  const winningCombos = {
-    rock: "scissors",
-    paper: "rock",
-    scissors: "paper",
-  };
-
-  return winningCombos[computerChoice] === humanChoice
-    ? computerChoice
-    : humanChoice;
+const getHumanChoice = (e) => {
+  playRound(e.target.id);
 };
 
 const playGame = () => {
@@ -28,16 +24,22 @@ const playGame = () => {
   let humanScore = 0;
 
   const playRound = (computerChoice, humanChoice) => {
-    console.log("-------------------");
-    console.log("You played", humanChoice);
-    console.log("Computer played", computerChoice);
+    const winningCombos = {
+      rock: "scissors",
+      paper: "rock",
+      scissors: "paper",
+    };
 
-    const roundWinner = getWinner(computerChoice, humanChoice);
+    console.log(`-------------------
+You played ${humanChoice}
+Computer played ${computerChoice}`);
 
-    if (roundWinner === "draw") {
+    if (computerChoice === humanChoice) {
       console.log("Draw.");
     } else {
-      roundWinner === computerChoice ? computerScore++ : humanScore++;
+      winningCombos[computerChoice] === humanChoice
+        ? computerScore++
+        : humanScore++;
       console.log(
         `You ${
           roundWinner === computerChoice
@@ -47,6 +49,7 @@ const playGame = () => {
       );
     }
     console.log("computer:", computerScore, ", human:", humanScore);
+    console.log(`-------------------`);
     return roundWinner;
   };
 
@@ -62,4 +65,5 @@ const playGame = () => {
   console.log(`YOU ${humanScore > computerScore ? "WIN" : "LOSE"}.`);
 };
 
-playGame();
+const startButton = document.querySelector("#start");
+startButton.addEventListener("click", playGame);
