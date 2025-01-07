@@ -4,14 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="game.css" />
   </head>
   <body>
-    <h1>Rock Paper Scissors</h1>
+    <div class="header">
+      <img
+        src="./images/logo.png"
+        alt="rock paper scissors icon"
+        class="header-img header-el"
+      />
+      <h1 class="header-el">Rock Paper Scissors</h1>
+    </div>
     <h3>First to 5 wins.</h3>
+    <div id="game-viz">
+      <div id="human-viz" class="viz-el"></div>
+      <div id="computer-viz" class="viz-el"></div>
+    </div>
     <div id="buttons">
-      <button type="button" id="rock">Rock</button>
-      <button type="button" id="paper">Paper</button>
-      <button type="button" id="scissors">Scissors</button>
+      <img
+        class="play-button"
+        id="rock"
+        src="./images/rock.png"
+        alt="hand playing rock"
+        height="100px"
+      />
+      <img
+        class="play-button"
+        id="paper"
+        src="./images/paper.png"
+        alt="hand playing paper"
+        height="100px"
+      />
+      <img
+        class="play-button"
+        id="scissors"
+        src="./images/scissors.png"
+        alt="hand playing scissors"
+        height="100px"
+      />
     </div>
     <div id="choices"></div>
     <div id="round-result"></div>
@@ -23,5 +53,12 @@
     <div id="final-result"></div>
     <div id="reset-button-placeholder"></div>
     <script src="./game.js"></script>
+    <div class="footer">
+      Built by
+      <a href="https://www.github.com/eburdekin" target="_blank">@eburdekin</a>.
+      Icons from
+      <a href="https://www.flaticon.com/free-icons/" target="_blank">Flaticon</a
+      >.
+    </div>
   </body>
 </html>

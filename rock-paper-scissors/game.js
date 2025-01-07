@@ -8,11 +8,15 @@ buttons.forEach((button) => {
   button.addEventListener("click", (e) => playRound(e));
 });
 
-const humanScoreDisplay = document.querySelector("#human-score");
-const computerScoreDisplay = document.querySelector("#computer-score");
+const humanViz = document.querySelector("#human-viz");
+const computerViz = document.querySelector("#computer-viz");
 
 const choicesDisplay = document.querySelector("#choices");
 const roundResultDisplay = document.querySelector("#round-result");
+
+const humanScoreDisplay = document.querySelector("#human-score");
+const computerScoreDisplay = document.querySelector("#computer-score");
+
 const finalResultDisplay = document.querySelector("#final-result");
 const resetButtonPlaceholder = document.querySelector(
   "#reset-button-placeholder"
@@ -37,6 +41,29 @@ const playRound = (e) => {
     paper: "rock",
     scissors: "paper",
   };
+
+  let rockImage = document.createElement("img");
+  rockImage.src = "./images/rock.png";
+  rockImage.alt = "hand playing rock";
+
+  let paperImage = document.createElement("img");
+  paperImage.src = "./images/paper.png";
+  rockImage.alt = "hand playing paper";
+
+  let scissorsImage = document.createElement("img");
+  scissorsImage.src = "./images/scissors.png";
+  scissorsImage.alt = "hand playing scissors";
+
+  const images = {
+    rock: rockImage,
+    paper: paperImage,
+    scissors: scissorsImage,
+  };
+
+  humanViz.innerHTML = "";
+  computerViz.innerHTML = "";
+  humanViz.append(images[humanChoice].cloneNode());
+  computerViz.append(images[computerChoice].cloneNode());
 
   choicesDisplay.innerText = `You played ${humanChoice}.
     Computer played ${computerChoice}`;
