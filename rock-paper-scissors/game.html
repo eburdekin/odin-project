@@ -6,14 +6,22 @@
     <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <button id="start">Start game</button>
-    <button type="button" id="rock">Rock</button>
-    <button type="button" id="paper">Paper</button>
-    <button type="button" id="scissors">Scissors</button>
-    <div id="score-display">
-      User: <span id="human-score"></span> | Computer:
-      <span id="computer-score"></span>
+    <h1>Rock Paper Scissors</h1>
+    <h3>First to 5 wins.</h3>
+    <div id="buttons">
+      <button type="button" id="rock">Rock</button>
+      <button type="button" id="paper">Paper</button>
+      <button type="button" id="scissors">Scissors</button>
     </div>
+    <div id="choices"></div>
+    <div id="round-result"></div>
+    <div id="score-display">
+      <h2>Scores:</h2>
+      User: <span id="human-score">0</span> | Computer:
+      <span id="computer-score">0</span>
+    </div>
+    <div id="final-result"></div>
+    <div id="reset-button-placeholder"></div>
     <script src="./game.js"></script>
   </body>
 </html>

@@ -1,3 +1,23 @@
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+
+const buttons = [rockButton, paperButton, scissorsButton];
+
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => playRound(e));
+});
+
+const humanScoreDisplay = document.querySelector("#human-score");
+const computerScoreDisplay = document.querySelector("#computer-score");
+
+const choicesDisplay = document.querySelector("#choices");
+const roundResultDisplay = document.querySelector("#round-result");
+const finalResultDisplay = document.querySelector("#final-result");
+const resetButtonPlaceholder = document.querySelector(
+  "#reset-button-placeholder"
+);
+
 const CHOICES = ["rock", "paper", "scissors"];
 
 const getComputerChoice = () => {
@@ -5,65 +25,56 @@ const getComputerChoice = () => {
   return CHOICES[randomIndex];
 };
 
-const rockButton = document.querySelector("#rock");
-const paperButton = document.querySelector("#paper");
-const scissorsButton = document.querySelector("#scissors");
-rockButton.addEventListener("click", (e) => getHumanChoice(e));
-paperButton.addEventListener("click", (e) => getHumanChoice(e));
-scissorsButton.addEventListener("click", (e) => getHumanChoice(e));
+let computerScore = 0;
+let humanScore = 0;
 
-const humanScoreDisplay = document.querySelector("#human-score");
-const computerScoreDisplay = document.querySelector("#computer-score");
+const playRound = (e) => {
+  const computerChoice = getComputerChoice();
+  const humanChoice = e.target.id;
 
-const getHumanChoice = (e) => {
-  playRound(e.target.id);
-};
-
-const playGame = () => {
-  let computerScore = 0;
-  let humanScore = 0;
-
-  const playRound = (computerChoice, humanChoice) => {
-    const winningCombos = {
-      rock: "scissors",
-      paper: "rock",
-      scissors: "paper",
-    };
-
-    console.log(`-------------------
-You played ${humanChoice}
-Computer played ${computerChoice}`);
-
-    if (computerChoice === humanChoice) {
-      console.log("Draw.");
-    } else {
-      winningCombos[computerChoice] === humanChoice
-        ? computerScore++
-        : humanScore++;
-      console.log(
-        `You ${
-          roundWinner === computerChoice
-            ? `lose. ${computerChoice} beats ${humanChoice}`
-            : `win! ${humanChoice} beats ${computerChoice}`
-        }`
-      );
-    }
-    console.log("computer:", computerScore, ", human:", humanScore);
-    console.log(`-------------------`);
-    return roundWinner;
+  const winningCombos = {
+    rock: "scissors",
+    paper: "rock",
+    scissors: "paper",
   };
 
-  console.log("Rock Paper Scissors");
-  console.log("Best 3 out of 5.");
+  choicesDisplay.innerText = `You played ${humanChoice}.
+    Computer played ${computerChoice}`;
 
-  while (computerScore < 3 && humanScore < 3) {
-    const computerSelection = getComputerChoice();
-    const humanSelection = getHumanChoice();
-    playRound(computerSelection, humanSelection);
+  const getWinner = (computerChoice, humanChoice) => {
+    if (computerChoice === humanChoice) return "draw";
+
+    return winningCombos[computerChoice] === humanChoice
+      ? computerChoice
+      : humanChoice;
+  };
+
+  const roundWinner = getWinner(computerChoice, humanChoice);
+
+  if (roundWinner === "draw") {
+    roundResultDisplay.innerText = "Draw.";
+  } else {
+    roundWinner === computerChoice ? computerScore++ : humanScore++;
+    roundResultDisplay.innerText = `You ${
+      roundWinner === computerChoice
+        ? `lose this round. ${computerChoice} beats ${humanChoice}.`
+        : `win this round! ${humanChoice} beats ${computerChoice}.`
+    }`;
   }
 
-  console.log(`YOU ${humanScore > computerScore ? "WIN" : "LOSE"}.`);
-};
+  computerScoreDisplay.innerText = computerScore;
+  humanScoreDisplay.innerText = humanScore;
 
-const startButton = document.querySelector("#start");
-startButton.addEventListener("click", playGame);
+  if (computerScore === 5 || humanScore === 5) {
+    finalResultDisplay.innerText = `YOU ${
+      humanScore > computerScore ? "WIN" : "LOSE"
+    }!`;
+    buttons.forEach((button) => {
+      button.setAttribute("disabled", true);
+    });
+    const resetButton = document.createElement("button");
+    resetButton.innerText = "Play again";
+    resetButton.addEventListener("click", () => window.location.reload(true));
+    resetButtonPlaceholder.append(resetButton);
+  }
+};
