@@ -1,0 +1,19 @@
+#container {
+    height: 960px;
+    width: 960px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: black;
+}
+
+.square {
+    flex: 1;
+    aspect-ratio: 1;
+    box-sizing: border-box;
+    border: 1px solid slategrey;
+}
+
+.square+.square {
+    border-left: none;
+}
