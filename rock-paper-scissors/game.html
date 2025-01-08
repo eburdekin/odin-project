@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="game.css" />
   </head>
   <body>
-    <div class="header">
+    <header>
       <img
         src="./images/logo.png"
         alt="rock paper scissors icon"
-        class="header-img header-el"
+        class="header-el"
       />
       <h1 class="header-el">Rock Paper Scissors</h1>
-    </div>
-    <h3>
+    </header>
+    <h4>
       First to 5 wins. Press r, p, or s on your keyboard or use the buttons
       below.
-    </h3>
+    </h4>
     <div id="game-viz">
       <div class="viz-el">
         <span id="human-name">You</span>
@@ -35,21 +35,21 @@
         id="rock"
         src="./images/rock.png"
         alt="hand playing rock"
-        height="100px"
+        aria-label="play rock"
       />
       <img
         class="play-button hover-effect"
         id="paper"
         src="./images/paper.png"
         alt="hand playing paper"
-        height="100px"
+        aria-label="play paper"
       />
       <img
         class="play-button hover-effect"
         id="scissors"
         src="./images/scissors.png"
         alt="hand playing scissors"
-        height="100px"
+        aria-label="play scissors"
       />
     </div>
     <div id="round-result"></div>
@@ -58,15 +58,15 @@
       User: <span id="human-score">0</span> | Computer:
       <span id="computer-score">0</span>
     </div>
-    <div id="final-result"></div>
+    <h2 id="final-result"></h2>
     <div id="reset-button-placeholder"></div>
     <script src="./game.js"></script>
-    <div class="footer">
+    <footer>
       Built by
       <a href="https://www.github.com/eburdekin" target="_blank">@eburdekin</a>.
       Icons from
       <a href="https://www.flaticon.com/free-icons/" target="_blank">Flaticon</a
       >.
-    </div>
+    </footer>
   </body>
 </html>

@@ -5,6 +5,8 @@ const scissorsButton = document.querySelector("#scissors");
 const humanViz = document.querySelector("#human-viz");
 const computerViz = document.querySelector("#computer-viz");
 
+const humanNameDisplay = document.querySelector("#human-name");
+
 const roundResultDisplay = document.querySelector("#round-result");
 
 const humanScoreDisplay = document.querySelector("#human-score");
