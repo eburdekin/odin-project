@@ -37,13 +37,24 @@ body {
     width: 500px;
 }
 
+#human-name {
+    position: absolute;
+    margin: 0 0;
+}
+
+#computer-name {
+    position: absolute;
+    margin: 0 0;
+}
+
 .viz-el img {
     height: 275px;
     padding: 10px;
 }
 
-.play-button:hover {
+.hover-effect:hover {
     cursor: grab;
+    transform: translateY(-8px);
 }
 
 .footer {

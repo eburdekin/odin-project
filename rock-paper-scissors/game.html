@@ -15,35 +15,43 @@
       />
       <h1 class="header-el">Rock Paper Scissors</h1>
     </div>
-    <h3>First to 5 wins.</h3>
+    <h3>
+      First to 5 wins. Press r, p, or s on your keyboard or use the buttons
+      below.
+    </h3>
     <div id="game-viz">
-      <div id="human-viz" class="viz-el"></div>
-      <div id="computer-viz" class="viz-el"></div>
+      <div class="viz-el">
+        <span id="human-name">You</span>
+        <div id="human-viz"></div>
+      </div>
+      <div class="viz-el">
+        <span id="computer-name">Computer</span>
+        <div id="computer-viz"></div>
+      </div>
     </div>
     <div id="buttons">
       <img
-        class="play-button"
+        class="play-button hover-effect"
         id="rock"
         src="./images/rock.png"
         alt="hand playing rock"
         height="100px"
       />
       <img
-        class="play-button"
+        class="play-button hover-effect"
         id="paper"
         src="./images/paper.png"
         alt="hand playing paper"
         height="100px"
       />
       <img
-        class="play-button"
+        class="play-button hover-effect"
         id="scissors"
         src="./images/scissors.png"
         alt="hand playing scissors"
         height="100px"
       />
     </div>
-    <div id="choices"></div>
     <div id="round-result"></div>
     <div id="score-display">
       <h2>Scores:</h2>
