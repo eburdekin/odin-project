@@ -5,8 +5,6 @@ const scissorsButton = document.querySelector("#scissors");
 const humanViz = document.querySelector("#human-viz");
 const computerViz = document.querySelector("#computer-viz");
 
-const humanNameDisplay = document.querySelector("#human-name");
-
 const roundResultDisplay = document.querySelector("#round-result");
 
 const humanScoreDisplay = document.querySelector("#human-score");
@@ -41,6 +39,12 @@ document.addEventListener("keydown", handleKeydown);
 
 const CHOICES = ["rock", "paper", "scissors"];
 
+const winningCombos = {
+  rock: "scissors",
+  paper: "rock",
+  scissors: "paper",
+};
+
 const getComputerChoice = () => {
   const randomIndex = Math.floor(Math.random() * CHOICES.length);
   return CHOICES[randomIndex];
@@ -52,39 +56,12 @@ let humanScore = 0;
 const playRound = (humanChoice) => {
   const computerChoice = getComputerChoice();
 
-  const winningCombos = {
-    rock: "scissors",
-    paper: "rock",
-    scissors: "paper",
-  };
-
-  const createImageElement = (choice) => {
-    const img = document.createElement("img");
-    img.src = `./images/${choice}.png`;
-    img.alt = `hand playing ${choice}`;
-    return img;
-  };
-
   humanViz.innerHTML = "";
   computerViz.innerHTML = "";
   humanViz.append(createImageElement(humanChoice).cloneNode());
   computerViz.append(createImageElement(computerChoice).cloneNode());
 
-  const getWinner = (computerChoice, humanChoice) => {
-    if (computerChoice === humanChoice) {
-      roundResultDisplay.innerText = "Draw.";
-      return;
-    }
-    if (winningCombos[computerChoice] === humanChoice) {
-      computerScore++;
-      roundResultDisplay.innerText = `You lose this round. ${computerChoice} beats ${humanChoice}.`;
-    } else {
-      humanScore++;
-      roundResultDisplay.innerText = `You win this round! ${humanChoice} beats ${computerChoice}.`;
-    }
-  };
-
-  const roundWinner = getWinner(computerChoice, humanChoice);
+  getWinner(computerChoice, humanChoice);
 
   computerScoreDisplay.innerText = computerScore;
   humanScoreDisplay.innerText = humanScore;
@@ -96,6 +73,27 @@ const playRound = (humanChoice) => {
     disablePlayButtons();
     addResetButton();
   }
+};
+
+const getWinner = (computerChoice, humanChoice) => {
+  if (computerChoice === humanChoice) {
+    roundResultDisplay.innerText = "Draw.";
+    return;
+  }
+  if (winningCombos[computerChoice] === humanChoice) {
+    computerScore++;
+    roundResultDisplay.innerText = `You lose this round. ${computerChoice} beats ${humanChoice}.`;
+  } else {
+    humanScore++;
+    roundResultDisplay.innerText = `You win this round! ${humanChoice} beats ${computerChoice}.`;
+  }
+};
+
+const createImageElement = (choice) => {
+  const img = document.createElement("img");
+  img.src = `./images/${choice}.png`;
+  img.alt = `hand playing ${choice}`;
+  return img;
 };
 
 const disablePlayButtons = () => {
