@@ -22,9 +22,6 @@ const createGrid = (gridSize) => {
     const newSquare = document.createElement("div");
     newSquare.classList.add("square");
     newSquare.style.flexBasis = `${100 / gridSize}%`;
-    newSquare.addEventListener("mouseover", () => {
-      newSquare.style.backgroundColor = getRandomColor();
-    });
     containerDiv.append(newSquare);
   }
 };
@@ -42,3 +39,9 @@ const showPrompt = () => {
 };
 
 promptButton.addEventListener("click", showPrompt);
+
+containerDiv.addEventListener("mouseover", (event) => {
+  if (event.target.classList.contains("square")) {
+    event.target.style.backgroundColor = getRandomColor();
+  }
+});
